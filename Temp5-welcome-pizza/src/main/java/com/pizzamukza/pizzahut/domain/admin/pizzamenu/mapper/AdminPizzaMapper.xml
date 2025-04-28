@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment/>
+    <entry key="pizzaList">
+        SELECT
+        p.pizzaId,
+        p.pizzaName,
+        s.sizeName,
+        s.price,
+        s.quantity
+        FROM tbl_pizza p
+        JOIN tbl_size s ON p.pizzaId = s.pizzaId
+    </entry>
+
+    <entry key="insertPizza">
+        INSERT INTO tbl_pizza
+        (
+        pizzaName
+        , quantity
+        )
+        VALUES (
+        ?, ?
+        )
+    </entry>
+
+    <!-- 피자 수량 증가 -->
+    <entry key="increaseQuantity">
+        <![CDATA[
+    UPDATE tbl_size
+    SET quantity = quantity + ?
+    WHERE pizzaId = (
+        SELECT pizzaId
+        FROM tbl_pizza
+        WHERE pizzaName = ?
+    )
+    ]]>
+    </entry>
+
+
+    <!-- 피자 수량 감소 -->
+    <entry key="decreaseQuantity">
+        <![CDATA[
+    UPDATE tbl_size
+    SET quantity = quantity - ?
+    WHERE pizzaId = (
+        SELECT pizzaId
+        FROM tbl_pizza
+        WHERE pizzaName = ?
+    )
+    ]]>
+    </entry>
+
+
+    <!--    품절처리 할꺼면 밑에 soldutPizza sql이 더 낫고 메뉴 삭제라면 deletePizza이게 더 나음 -->
+    <entry key="deletePizza">
+        DELETE FROM tbl_pizza
+        WHERE pizzaName = ?
+    </entry>
+
+    <entry key="soldutPizza">
+        UPDATE tbl_pizza
+        SET quantity = 0 WHERE pizza_name = ?
+    </entry>
+
+</properties>

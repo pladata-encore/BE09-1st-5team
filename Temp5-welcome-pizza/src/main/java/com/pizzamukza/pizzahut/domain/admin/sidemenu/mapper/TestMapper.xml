@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <comment/>
+    <!-- 사이드 등록 -->
+    <entry key="insertSideMenu">
+        INSERT
+        INTO tbl_side_menu
+        (
+        sideName
+        , price
+        , quantity
+        )
+        VALUES
+        (
+        ?
+        , ?
+        , ?
+        )
+    </entry>
+
+    <!-- 사이드 수량 증가 -->
+    <entry key="increaseQuantity">
+        <![CDATA[
+        UPDATE tbl_side_menu
+        SET quantity = quantity + ?
+        WHERE sideName = ?
+    ]]>
+    </entry>
+
+    <!-- 사이드 수량 감소 -->
+    <entry key="decreaseQuantity">
+        <![CDATA[
+        UPDATE tbl_side_menu
+        SET quantity = quantity - ?
+        WHERE sideName = ?
+    ]]>
+    </entry>
+
+    <!-- 사이드 품절 (1) -->
+    <!--            품절처리 할꺼면 밑에 soldutPizza sql이 더 낫고 메뉴 삭제라면 deletePizza이게 더 나음 -->
+    <entry key="deleteSideMenu">
+        DELETE FROM tbl_side_menu
+        WHERE sideName = ?
+    </entry>
+
+    <!-- 사이드 품절 (2) -->
+    <entry key="soldoutSideMenu">
+        UPDATE tbl_side_menu
+        SET quantity = 0 WHERE sideName = ?
+    </entry>
+
+    <!-- 사이드 가격 수정 -->
+    <entry key="updateSideMenu">
+        UPDATE tbl_side_menu
+        SET price = ?
+        WHERE sideName = ?
+    </entry>
+
+    <!-- 사이드 id를 입력했을 때, sideName, price, quantity -->
+    <entry key="selectSideById">
+        SELECT sideName, price, quantity
+        FROM tbl_side_menu
+        WHERE sideId = ?
+    </entry>
+</properties>
