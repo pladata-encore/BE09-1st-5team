@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment/>
+
+  <!--사이드 아이디로 수량 감소-->
+  <entry key="decreaseSideById">
+    UPDATE tbl_side_menu
+    SET quantity = quantity - ?
+    WHERE sideId = ?
+  </entry>
+
+  <entry key="selectAllSideDetails">
+    SELECT *
+    FROM tbl_side_menu
+  </entry>
+
+
+  <!--사이드 아이디로 가격 조회-->
+  <entry key="selectSideDetailsById">
+    SELECT *
+    FROM tbl_side_menu
+    WHERE sideId = ?
+  </entry>
+</properties>

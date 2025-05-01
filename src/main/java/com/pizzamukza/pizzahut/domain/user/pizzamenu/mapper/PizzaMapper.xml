@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment/>
+
+  <!--  새로운 피자 등록(수량0 일괄) -->
+  <entry key="insertPizzaWithoutQuantity">
+    INSERT INTO tbl_pizza (
+    pizzaName,
+    quantity
+    ) VALUES (
+    ?,
+    0
+    )
+  </entry>
+
+  <!-- 피자 등록(수량 지정) -->
+  <entry key="insertPizzaWithQuantity">
+    INSERT INTO tbl_pizza (
+    pizzaName,
+    quantity
+    ) VALUES (
+    ?,
+    ?
+    )
+  </entry>
+
+  <!-- 피자 목록 조회 - @@피자 @@ 사이즈 @@원 @@개 가져오기 -->
+  <entry key="selectAllPizzaDetails">
+    SELECT
+    p.pizzaId,
+    p.pizzaName,
+    s.sizeId,
+    s.sizeName,
+    s.price,
+    s.quantity
+    FROM tbl_pizza p
+    JOIN tbl_size s ON p.pizzaId = s.pizzaId
+  </entry>
+
+  <!-- 사이즈 ID로 피자 이름 + 사이즈 조합의 가격 조회 -->
+  <entry key="selectPizzaDetailsBySizeId">
+    SELECT
+    s.sizeName,
+    s.price,
+    p.pizzaName
+    FROM tbl_size s
+    JOIN tbl_pizza p ON s.pizzaId = p.pizzaId
+    WHERE s.sizeId = ?
+  </entry>
+
+  <!-- 피자 이름(피자이름 + 사이즈)으로 pizzaId 조회 -->
+  <entry key="selectPizzaIdByName">
+    SELECT
+    pizzaId
+    FROM tbl_pizza
+    WHERE pizzaName = ?
+  </entry>
+
+  <!-- 피자 가격 변경 -->
+  <entry key="updatePizzaPriceByPizzaId">
+    UPDATE tbl_size
+    SET price = ?
+    WHERE pizzaId = ?
+  </entry>
+
+  <!-- 피자 삭제(단종) -->
+  <!--  사이즈 네임은 페퍼로니피자 미디움/ 페퍼로니피자 라지 -->
+  <entry key="deleteSizeBySizeName">
+    DELETE FROM tbl_size
+    WHERE sizeName = ?
+  </entry>
+
+  <!-- 피자 수량 감소(sizeId, int quantity) -->
+  <entry key="dicreasePizzaQuantityBySizeId">
+    UPDATE tbl_size
+    SET quantity = quantity - ?
+    WHERE sizeId = ?
+  </entry>
+
+  <!-- 피자 아이디로 수량 조회 -->
+  <entry key="selectPizzaQuantityBySizeId">
+    SELECT
+    s.quantity
+    FROM tbl_size s
+    JOIN tbl_pizza p ON s.pizzaId = p.pizzaId
+    WHERE s.sizeId = ?
+  </entry>
+
+  <!-- 피자 아이디로 가격 조회 -->
+  <entry key="selectPizzaPriceyBySizeId">
+    SELECT
+    s.price
+    FROM tbl_size s
+    JOIN tbl_pizza p ON s.pizzaId = p.pizzaId
+    WHERE s.sizeId = ?
+  </entry>
+
+  <!-- sideId로 피자 정보 조회 -->
+  <entry key="selectPizzaDetailsById">
+    SELECT
+    p.pizzaId,
+    p.pizzaName,
+    s.sizeId,
+    s.sizeName,
+    s.price,
+    s.quantity
+    FROM tbl_pizza p
+    JOIN tbl_size s ON p.pizzaId = s.pizzaId
+    WHERE s.sizeId = ?
+  </entry>
+
+</properties>
